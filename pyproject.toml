@@ -1,0 +1,49 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "handcalcs"
+author = "Connor Ferster"
+author-email = "connorferster@gmail.com"
+home-page = "https://github.com/connorferster/handcalcs"
+classifiers = [ "License :: OSI Approved :: Apache Software License",]
+description-file = "README.md"
+requires = [
+    "pyparsing >= 2.4.7",
+    "more-itertools >= 8.5.0",
+    "innerscope >= 0.2.0",
+    "nbconvert >= 6.0.0",
+]
+
+[tool.flit.metadata.requires-extra]
+test = [
+    "pytest >= 6.0.0",
+    "pytest-cov >= 2.9.0",
+    "coverage[toml] >= 5.5.0",
+]
+
+dev = [
+    "jupyterlab >= 3.0.0",
+    "sympy",
+    "forallpeople >= 2.1.0",    
+]
+
+docs = [
+    "sphinx", 
+]
+
+[tool.flit.entrypoints."nbconvert.exporters"]
+HTML_noinput = 'handcalcs.exporters:HTMLHideInputExporter'
+PDF_noinput = 'handcalcs.exporters:PDFHideInputExporter'
+LaTeX_noinput = 'handcalcs.exporters:LatexHideInputExporter'
+
+[tool.coverage.paths]
+source = ['handcalcs', '*/site-packages']
+
+[tool.coverage.run]
+branch = true
+source = ['handcalcs']
+
+[tool.coverage.report]
+show_missing = true
